@@ -16,7 +16,7 @@ export async function changeClothing(imageUrl, prompt) {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        version: "95b7223104132402a9ae91cc677285bc5eb997834bd2349fa486f53910fd68b3",
+        version: "795433b19458d0f4fa172a7ccf93178d2adb1cb8ab2ad6c8fdc33fdbcd49f477",
         input: { image: imageUrl, prompt }
       })
     });
