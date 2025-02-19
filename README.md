@@ -1,6 +1,6 @@
-# Prueba de Ropa con IA
+# Decor IA
 
-Este proyecto usa IA para probar ropa en fotos de cuerpo completo. 🚀
+Este proyecto usa IA para decorar espacios. 🚀
 
 ## Tecnologías usadas
 - React.js
