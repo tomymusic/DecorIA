@@ -1,24 +1,31 @@
+import express from "express";
+import cors from "cors";
 import { changeClothing } from "../replicate.js";
 
-export default async function handler(req, res) {
-  if (req.method === "GET") {
-    return res.status(200).json({ message: "🚀 Backend de Prueba IA - Funciona Correctamente!" });
-  }
+const app = express();
+app.use(cors());
+app.use(express.json()); // ✅ Enables JSON body parsing for req.body
 
-  if (req.method === "POST") {
+// POST request to process clothing changes with AI
+app.post("/api/change-clothing", async (req, res) => {
+  try {
     const { imageUrl, prompt } = req.body;
 
     if (!imageUrl || !prompt) {
-      return res.status(400).json({ error: "Faltan parámetros" });
+      return res.status(400).json({ error: "Missing parameters: imageUrl or prompt" });
     }
 
-    try {
-      const result = await changeClothing(imageUrl, prompt);
-      return res.status(200).json(result);
-    } catch (error) {
-      return res.status(500).json({ error: "Error procesando la imagen" });
-    }
+    const result = await changeClothing(imageUrl, prompt);
+    res.status(200).json(result);
+  } catch (error) {
+    console.error("Error processing image:", error);
+    res.status(500).json({ error: "Error processing the image" });
   }
+});
 
-  return res.status(405).json({ error: "Método no permitido" });
-}
+// ✅ GET request to verify backend is running
+app.get("/api/", (req, res) => {
+  res.status(200).json({ message: "🚀 Backend for AI Clothing Change is running successfully!" });
+});
+
+export default app;
