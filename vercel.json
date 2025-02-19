@@ -4,10 +4,9 @@
       "CI": "false"
     }
   },
-  "rewrites": [
-    {
-      "source": "/api/(.*)",
-      "destination": "/backend/index.js"
+  "functions": {
+    "api/index.js": {
+      "runtime": "nodejs18.x"
     }
-  ]
+  }
 }
