@@ -9,6 +9,8 @@ export async function changeClothing(imageUrl, prompt) {
   }
 
   try {
+    console.log("🚀 Sending request to Replicate with:", { imageUrl, prompt });
+
     const response = await fetch("https://api.replicate.com/v1/predictions", {
       method: "POST",
       headers: {
@@ -16,7 +18,7 @@ export async function changeClothing(imageUrl, prompt) {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        version: "795433b19458d0f4fa172a7ccf93178d2adb1cb8ab2ad6c8fdc33fdbcd49f477",
+        version: "8ebda4c70b3ea2a2bf86e44595afb562a2cdf85525c620f1671a78113c9f325b",  // ✅ Updated Model ID
         input: { image: imageUrl, prompt }
       })
     });
