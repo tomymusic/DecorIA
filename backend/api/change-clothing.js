@@ -2,20 +2,20 @@ import { changeClothing } from "../replicate.js";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
-    return res.status(405).json({ error: "Método no permitido" });
+    return res.status(405).json({ error: "Method Not Allowed" });
   }
 
   const { imageUrl, prompt } = req.body;
-
   if (!imageUrl || !prompt) {
-    return res.status(400).json({ error: "Faltan parámetros: imageUrl o prompt" });
+    return res.status(400).json({ error: "Missing parameters" });
   }
 
   try {
     const result = await changeClothing(imageUrl, prompt);
-    res.status(200).json(result);
+    return res.status(200).json(result);
   } catch (error) {
-    console.error("❌ Error procesando la imagen:", error);
-    res.status(500).json({ error: "Error procesando la imagen" });
+    console.error("Error:", error);
+    return res.status(500).json({ error: "Internal Server Error" });
   }
-}
+};
+
