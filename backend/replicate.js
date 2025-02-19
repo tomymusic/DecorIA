@@ -9,9 +9,9 @@ export async function changeClothing(imageUrl, prompt) {
   }
 
   try {
-    console.log("🚀 Sending request to Replicate with:", { imageUrl, prompt });
+    console.log("🚀 Enviando solicitud a Replicate con:", { imageUrl, prompt });
 
-    // Step 1: Start the request
+    // 1️⃣ Enviar la petición a la IA
     const startResponse = await fetch("https://api.replicate.com/v1/predictions", {
       method: "POST",
       headers: {
@@ -31,15 +31,15 @@ export async function changeClothing(imageUrl, prompt) {
       throw new Error(`Replicate API Error: ${startData.detail || "Unknown error"}`);
     }
 
-    console.log("✅ Processing started. ID:", startData.id);
+    console.log("✅ Procesamiento iniciado. ID:", startData.id);
 
-    // Step 2: Polling (Wait for completion)
+    // 2️⃣ Esperar a que la IA termine el procesamiento
     let status = startData.status;
     let output = null;
 
     while (status === "starting" || status === "processing") {
-      console.log("⏳ Waiting for AI to complete processing...");
-      await new Promise(resolve => setTimeout(resolve, 5000)); // Wait 5 seconds before checking again
+      console.log("⏳ Esperando a que la IA complete el procesamiento...");
+      await new Promise(resolve => setTimeout(resolve, 5000)); // Esperar 5 segundos antes de consultar de nuevo
 
       const checkResponse = await fetch(`https://api.replicate.com/v1/predictions/${startData.id}`, {
         headers: {
@@ -52,15 +52,15 @@ export async function changeClothing(imageUrl, prompt) {
       output = checkData.output;
 
       if (status === "failed") {
-        console.error("❌ AI Processing Failed:", checkData);
-        throw new Error("AI failed to process the image.");
+        console.error("❌ La IA falló:", checkData);
+        throw new Error("La IA no pudo procesar la imagen.");
       }
     }
 
-    console.log("✅ AI Processing Complete:", output);
+    console.log("✅ IA Procesamiento Completo:", output);
     return { output };
   } catch (error) {
-    console.error("❌ ERROR PROCESSING IMAGE:", error.message);
-    throw new Error("Error processing the image");
+    console.error("❌ ERROR PROCESANDO LA IMAGEN:", error.message);
+    throw new Error("Error procesando la imagen");
   }
 }
