@@ -3,5 +3,11 @@
     "env": {
       "CI": "false"
     }
-  }
+  },
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/backend/index.js"
+    }
+  ]
 }
