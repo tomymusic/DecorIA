@@ -7,7 +7,7 @@ app.use(cors());
 app.use(express.json()); // ✅ Enables JSON body parsing for req.body
 
 // POST request to process clothing changes with AI
-app.post("/api/change-clothing", async (req, res) => {
+app.post("/api/decorate-room", async (req, res) => {
   try {
     const { imageUrl, prompt } = req.body;
 
