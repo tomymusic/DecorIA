@@ -13,12 +13,12 @@
   ],
   "routes": [
     {
-      "src": "/api/(.*)",
+      "src": "^/api/(.*)$",
       "dest": "/backend/api/$1"
     },
     {
       "src": "/(.*)",
-      "dest": "/index.html"
+      "dest": "/build/index.html"
     }
   ]
 }
