@@ -2,7 +2,7 @@ import fetch from "node-fetch";
 
 const REPLICATE_API_TOKEN = process.env.REPLICATE_API_TOKEN;
 
-export async function changeClothing(imageUrl, prompt) {
+export async function redesignRoom(imageUrl, prompt) {
   if (!REPLICATE_API_TOKEN) {
     console.error("❌ ERROR: Missing Replicate API Token!");
     throw new Error("Missing Replicate API Key");
@@ -11,7 +11,7 @@ export async function changeClothing(imageUrl, prompt) {
   try {
     console.log("🚀 Enviando solicitud a Replicate con:", { imageUrl, prompt });
 
-    // 1️⃣ Enviar la petición a la IA
+    // 1️⃣ Enviar la petición a la IA para rediseñar el espacio
     const startResponse = await fetch("https://api.replicate.com/v1/predictions", {
       method: "POST",
       headers: {
