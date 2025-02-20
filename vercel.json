@@ -2,16 +2,15 @@
   "version": 2,
   "builds": [
     {
-      "src": "backend/api/*.js",
+      "src": "backend/api/**/*.js",
       "use": "@vercel/node"
-    },
-    {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": { "distDir": "build" }
     }
   ],
   "routes": [
+    {
+      "src": "/api/change-clothing",
+      "dest": "/backend/api/change-clothing.js"
+    },
     {
       "src": "/api/(.*)",
       "dest": "/backend/api/$1"
