@@ -1,4 +1,4 @@
-import { redesignRoom } from "../../replicate.js";
+import { redesignRoom } from "../replicate.js";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
