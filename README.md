@@ -1,5 +1,5 @@
 🏡 DecorIA - Shopify Plugin para Remodelación con IA
-📌 Descripción
+
 DecorIA es una aplicación que permite a los comerciantes de Shopify remodelar espacios utilizando inteligencia artificial y vincular productos directamente desde su tienda.
 
 Los usuarios pueden subir una imagen de su espacio y DecorIA generará una versión remodelada con productos de su catálogo. Luego, los productos utilizados estarán disponibles para su compra directa.
