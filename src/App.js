@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "./components/ui/button";
 import { Card, CardContent } from "./components/ui/card";
 import { motion } from "framer-motion";
@@ -11,9 +11,8 @@ export default function App() {
   const [processedImage, setProcessedImage] = useState(null);
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [imageFile, setImageFile] = useState(null);
+  const [imageUploaded, setImageUploaded] = useState(false);
 
-  // ✅ Guardar la imagen en el estado
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
     if (!file) return setErrorMessage("No se seleccionó ninguna imagen.");
@@ -22,37 +21,40 @@ export default function App() {
     const reader = new FileReader();
     reader.onloadend = () => {
       setImagePreview(reader.result);
-      setImageFile(file); // Guardamos el archivo para enviarlo al backend
+      setImageUploaded(true);
     };
     reader.readAsDataURL(file);
   };
 
-  // ✅ Enviar la imagen al backend
-  const sendImageToBackend = async () => {
-    if (!imageFile) {
-      return setErrorMessage("Por favor, sube una imagen antes de continuar.");
+  const processImageWithAI = async () => {
+    if (!imageUploaded) {
+      return setErrorMessage("Por favor, sube una imagen antes de generar.");
     }
 
     setLoading(true);
     setErrorMessage("");
 
-    const formData = new FormData();
-    formData.append("image", imageFile);
-
     try {
       const response = await fetch("/api/redesign-room", {
         method: "POST",
-        body: formData,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          imageUrl: imagePreview, // Imagen en base64
+          prompt: "Mejora la decoración del ambiente.",
+        }),
       });
 
       const data = await response.json();
-      if (response.ok) {
-        setProcessedImage(data.imageUrl); // La imagen procesada devuelta por el backend
-      } else {
-        setErrorMessage("Error en la generación de imagen.");
+
+      if (!response.ok) {
+        throw new Error(data.error || "Error al procesar la imagen");
       }
+
+      setProcessedImage(data.outputImageUrl); // Imagen generada por la IA
     } catch (error) {
-      setErrorMessage("Error en el servidor.");
+      setErrorMessage(error.message);
     } finally {
       setLoading(false);
     }
@@ -73,8 +75,8 @@ export default function App() {
           />
           <Button
             className="mt-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-3 rounded-xl shadow-lg text-lg font-semibold hover:scale-105 transition-transform"
-            onClick={sendImageToBackend}
-            disabled={!imagePreview || loading}
+            onClick={processImageWithAI}
+            disabled={!imageUploaded || loading}
           >
             {loading ? <Loader2 className="animate-spin" /> : "Aplicar Estilos con IA"}
           </Button>
