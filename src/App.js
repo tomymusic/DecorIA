@@ -6,7 +6,7 @@ import { Loader2 } from "lucide-react";
 import ReactBeforeSliderComponent from "react-before-after-slider-component";
 import "react-before-after-slider-component/dist/build.css";
 
-export default function App() {
+export default function Home() {
   const [imagePreview, setImagePreview] = useState(null);
   const [processedImage, setProcessedImage] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -26,7 +26,7 @@ export default function App() {
     reader.readAsDataURL(file);
   };
 
-  const processImageWithAI = async () => {
+  const handleImageGeneration = async () => {
     if (!imageUploaded) {
       return setErrorMessage("Por favor, sube una imagen antes de generar.");
     }
@@ -34,27 +34,28 @@ export default function App() {
     setLoading(true);
     setErrorMessage("");
 
+    const requestBody = {
+      imageUrl: imagePreview, // La imagen que el usuario subió
+      prompt: "Mejora la decoración del ambiente." // Prompt fijo
+    };
+
     try {
       const response = await fetch("/api/redesign-room", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          imageUrl: imagePreview, // Imagen en base64
-          prompt: "Mejora la decoración del ambiente.",
-        }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(requestBody),
       });
 
       const data = await response.json();
 
-      if (!response.ok) {
-        throw new Error(data.error || "Error al procesar la imagen");
+      if (response.ok && data.output && data.output.length > 0) {
+        setProcessedImage(data.output[0]); // Mostrar la primera imagen generada
+      } else {
+        setErrorMessage("Error al procesar la imagen.");
       }
-
-      setProcessedImage(data.outputImageUrl); // Imagen generada por la IA
     } catch (error) {
-      setErrorMessage(error.message);
+      console.error("Error:", error);
+      setErrorMessage("Hubo un problema con la generación de la imagen.");
     } finally {
       setLoading(false);
     }
@@ -62,9 +63,7 @@ export default function App() {
 
   return (
     <div className="flex flex-col items-center p-8 bg-gradient-to-r from-blue-100 to-white min-h-screen text-gray-900">
-      <h1 className="text-5xl font-semibold mb-8 text-blue-700 tracking-wide">
-        Decoración Inteligente IA
-      </h1>
+      <h1 className="text-5xl font-semibold mb-8 text-blue-700 tracking-wide">Decoración Inteligente IA</h1>
       <Card className="w-full max-w-3xl p-10 shadow-2xl bg-white rounded-3xl border border-gray-300">
         <CardContent className="flex flex-col items-center gap-6">
           <input
@@ -75,14 +74,12 @@ export default function App() {
           />
           <Button
             className="mt-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-3 rounded-xl shadow-lg text-lg font-semibold hover:scale-105 transition-transform"
-            onClick={processImageWithAI}
+            onClick={handleImageGeneration}
             disabled={!imageUploaded || loading}
           >
             {loading ? <Loader2 className="animate-spin" /> : "Aplicar Estilos con IA"}
           </Button>
-          {errorMessage && (
-            <p className="mt-4 text-red-500 text-lg font-semibold">{errorMessage}</p>
-          )}
+          {errorMessage && <p className="mt-4 text-red-500 text-lg font-semibold">{errorMessage}</p>}
           {imagePreview && processedImage && (
             <motion.div
               className="mt-6 w-full max-w-2xl rounded-xl overflow-hidden shadow-lg border border-gray-300"
