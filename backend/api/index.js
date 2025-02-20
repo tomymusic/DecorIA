@@ -1,13 +1,14 @@
 import express from "express";
 import cors from "cors";
 import shopifyAuth from "./shopify-auth.js"; // Autenticación Shopify
+import shopifyProducts from "./shopify-products.js"; // Obtener productos de Shopify
 import { redesignRoom } from "../replicate.js"; // IA para remodelación
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-// ✅ Debug: Middleware para ver peticiones
+// ✅ Debug: Middleware para registrar todas las peticiones
 app.use((req, res, next) => {
   console.log(`🔹 Petición recibida: ${req.method} ${req.url}`);
   next();
@@ -23,7 +24,13 @@ app.get("/api/", (req, res) => {
   }
 });
 
-// ✅ Ruta para aplicar IA en rediseño
+// ✅ Ruta de autenticación Shopify
+app.use("/api/shopify-auth", shopifyAuth);
+
+// ✅ Ruta para obtener productos de Shopify
+app.use("/api/shopify-products", shopifyProducts);
+
+// ✅ Ruta para aplicar IA en rediseño de habitaciones
 app.post("/api/redesign-room", async (req, res) => {
   console.log("📥 Petición recibida en /api/redesign-room");
   try {
@@ -39,10 +46,7 @@ app.post("/api/redesign-room", async (req, res) => {
   }
 });
 
-// ✅ Ruta de autenticación Shopify
-app.use("/api", shopifyAuth);
-
-// ✅ Debug: Manejo de rutas no encontradas
+// ✅ Manejo de rutas no encontradas
 app.use((req, res) => {
   console.log(`❌ Ruta no encontrada: ${req.method} ${req.url}`);
   res.status(404).json({ error: "Ruta no encontrada" });
