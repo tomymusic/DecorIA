@@ -85,4 +85,14 @@ export default function Home() {
                     <img src={product.image} alt={product.name} className="w-24 h-24 rounded-lg object-cover" />
                     <h3 className="text-lg font-medium text-gray-800 mt-2">{product.name}</h3>
                     <p className="text-gray-600">{product.price}</p>
-                    <Button className="mt-3 bg-g
+                    <Button className="mt-3 bg-green-500 text-white px-6 py-2 rounded-lg" onClick={() => handleCart(product, "add")}>Añadir al Carrito</Button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </CardContent>
+      </Card>
+    </div>
+  );
+}
