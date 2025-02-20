@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import { changeClothing } from "../replicate.js";
+import { redesignRoom } from "../replicate.js"; // Cambiamos la importación
 
 const app = express();
 app.use(cors());
@@ -14,12 +14,12 @@ app.use((req, res, next) => {
 
 // ✅ Ruta principal de prueba
 app.get("/api/", (req, res) => {
-  res.status(200).json({ message: "🚀 Backend funcionando correctamente!" });
+  res.status(200).json({ message: "🚀 DecorIA backend funcionando correctamente!" });
 });
 
-// ✅ Ruta de cambio de ropa
-app.post("/api/change-clothing", async (req, res) => {
-  console.log("📥 Petición recibida en /api/change-clothing");
+// ✅ Ruta de remodelación de espacios
+app.post("/api/redesign-room", async (req, res) => {
+  console.log("📥 Petición recibida en /api/redesign-room");
   try {
     const { imageUrl, prompt } = req.body;
     
@@ -27,7 +27,7 @@ app.post("/api/change-clothing", async (req, res) => {
       return res.status(400).json({ error: "Faltan parámetros" });
     }
 
-    const result = await changeClothing(imageUrl, prompt);
+    const result = await redesignRoom(imageUrl, prompt);
     res.status(200).json(result);
   } catch (error) {
     console.error("❌ Error procesando la imagen:", error);
