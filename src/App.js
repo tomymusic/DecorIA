@@ -48,8 +48,8 @@ export default function Home() {
 
       const data = await response.json();
 
-      if (response.ok && data.output && data.output.length > 0) {
-        setProcessedImage(data.output[0]); // Mostrar la primera imagen generada
+      if (response.ok && data.output && data.output.length > 1) {
+        setProcessedImage(data.output[1]); // Mostrar la segunda imagen generada (output_1.png)
       } else {
         setErrorMessage("Error al procesar la imagen.");
       }
