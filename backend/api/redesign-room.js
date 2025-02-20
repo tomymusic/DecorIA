@@ -1,4 +1,4 @@
-import { redesignRoom } from "../replicate.js";
+import { redesignRoom } from "../../replicate.js";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -15,6 +15,6 @@ export default async function handler(req, res) {
     return res.status(200).json(result);
   } catch (error) {
     console.error("Error:", error);
-    return res.status(500).json({ error: "Internal Server Error" });
+    return res.status(500).json({ error: "Internal Server Error", details: error.message });
   }
 };
