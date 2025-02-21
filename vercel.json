@@ -32,5 +32,13 @@
       "src": "/(.*)",
       "dest": "/build/index.html"
     }
-  ]
+  ],
+  "functions": {
+    "backend/api/*.js": {
+      "runtime": "nodejs22.x"
+    }
+  },
+  "env": {
+    "NODE_ENV": "production"
+  }
 }
