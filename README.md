@@ -21,12 +21,6 @@
 
 🚀 **Convierte visitas en ventas con DecorIA y revoluciona la forma en que los clientes compran productos para el hogar!**
 
-
-# DecorIA
-
-### 📌 Descripción
-DecorIA es una aplicación de Shopify que permite rediseñar habitaciones utilizando IA. Se integra con Shopify para administrar productos y pedidos, y con un servicio de IA para generar imágenes de rediseño.
-
 ---
 
 ### 📦 Estructura del Proyecto
