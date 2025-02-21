@@ -1,4 +1,5 @@
-import { shopifyApi, LATEST_API_VERSION } from "@shopify/shopify-api";
+import pkg from "@shopify/shopify-api";
+const { shopifyApi, LATEST_API_VERSION } = pkg;
 import express from "express";
 import dotenv from "dotenv";
 
