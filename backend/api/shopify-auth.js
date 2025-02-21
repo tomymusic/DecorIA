@@ -1,30 +1,29 @@
-import pkg from "@shopify/shopify-api";
+import { shopifyApi, ApiVersion } from "@shopify/shopify-api";
 import express from "express";
 import dotenv from "dotenv";
 
 dotenv.config();
-const { shopifyApi, LATEST_API_VERSION } = pkg;
 const router = express.Router();
 
-// Inicializar Shopify API correctamente
+// ✅ Configuración correcta de Shopify API sin variable extra
 const shopify = shopifyApi({
     apiKey: process.env.SHOPIFY_API_KEY,
     apiSecretKey: process.env.SHOPIFY_API_SECRET,
     scopes: process.env.SHOPIFY_SCOPES.split(","),
-    hostName: process.env.SHOPIFY_REDIRECT_URI.replace("https://", ""),
-    apiVersion: LATEST_API_VERSION,
+    hostName: "decor-ia.vercel.app", // Se coloca directamente sin variable
+    apiVersion: ApiVersion.January24, // Ajustamos a la versión estable
 });
 
-// Ruta de prueba
+// ✅ Ruta de prueba para verificar que Shopify API responde
 router.get("/", (req, res) => {
     res.status(200).json({ message: "✅ Shopify Auth API funcionando correctamente!" });
 });
 
-// Ruta de autenticación con Shopify
+// ✅ Ruta de autenticación con Shopify
 router.get("/auth", async (req, res) => {
     const { shop } = req.query;
     if (!shop) {
-        return res.status(400).send("Falta el parámetro shop");
+        return res.status(400).json({ error: "Falta el parámetro shop" });
     }
 
     try {
@@ -41,7 +40,7 @@ router.get("/auth", async (req, res) => {
     }
 });
 
-// Ruta de callback para Shopify
+// ✅ Ruta de callback para Shopify
 router.get("/auth/callback", async (req, res) => {
     try {
         const session = await shopify.auth.callback({
