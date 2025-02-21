@@ -19,7 +19,6 @@ app.get("/api/", (req, res) => {
   res.status(200).json({ message: "🚀 DecorIA backend funcionando correctamente!" });
 });
 
-
 app.use("/api/shopify-auth", shopifyAuth);
 app.use("/api/shopify-products", shopifyProducts);
 
