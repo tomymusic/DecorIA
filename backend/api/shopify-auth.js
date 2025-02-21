@@ -1,9 +1,13 @@
 const { shopifyApi, LATEST_API_VERSION } = require("@shopify/shopify-api");
+const { restResources } = require("@shopify/shopify-api/rest/admin/2024-01");
 const express = require("express");
 const dotenv = require("dotenv");
 
 dotenv.config();
 const router = express.Router();
+
+// ✅ Agregar adaptador para Vercel
+shopifyApi.adapters.nodeRuntime.import();
 
 // ✅ Configuración correcta de Shopify API
 const shopify = shopifyApi({
@@ -12,6 +16,7 @@ const shopify = shopifyApi({
     scopes: process.env.SHOPIFY_SCOPES.split(","),
     hostName: process.env.SHOPIFY_REDIRECT_URI.replace("https://", ""),
     apiVersion: LATEST_API_VERSION,
+    restResources,
 });
 
 // ✅ Ruta de prueba
