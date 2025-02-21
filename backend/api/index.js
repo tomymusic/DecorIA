@@ -15,8 +15,10 @@ app.use((req, res, next) => {
 });
 
 app.get("/api/", (req, res) => {
+  console.log("✅ Petición recibida en /api/");
   res.status(200).json({ message: "🚀 DecorIA backend funcionando correctamente!" });
 });
+
 
 app.use("/api/shopify-auth", shopifyAuth);
 app.use("/api/shopify-products", shopifyProducts);
