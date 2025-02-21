@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 import axios from "axios";
 
 dotenv.config();
-const router = express.Router();
+express.Router();
 
 const SHOPIFY_API_KEY = process.env.SHOPIFY_API_KEY;
 const SHOPIFY_API_SECRET = process.env.SHOPIFY_API_SECRET;
