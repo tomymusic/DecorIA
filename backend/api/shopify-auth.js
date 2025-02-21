@@ -1,12 +1,12 @@
-import * as shopifyModule from "@shopify/shopify-api";
-const { shopifyApi, LATEST_API_VERSION } = shopifyModule;
+import pkg from "@shopify/shopify-api";
 import express from "express";
 import dotenv from "dotenv";
 
 dotenv.config();
+const { shopifyApi, LATEST_API_VERSION } = pkg;
 const router = express.Router();
 
-// Inicializar Shopify API de forma correcta
+// Inicializar Shopify API correctamente
 const shopify = shopifyApi({
     apiKey: process.env.SHOPIFY_API_KEY,
     apiSecretKey: process.env.SHOPIFY_API_SECRET,
@@ -15,12 +15,12 @@ const shopify = shopifyApi({
     apiVersion: LATEST_API_VERSION,
 });
 
-// Ruta de prueba para verificar que la API responde
+// Ruta de prueba
 router.get("/", (req, res) => {
     res.status(200).json({ message: "✅ Shopify Auth API funcionando correctamente!" });
 });
 
-// Ruta para iniciar autenticación con Shopify
+// Ruta de autenticación con Shopify
 router.get("/auth", async (req, res) => {
     const { shop } = req.query;
     if (!shop) {
@@ -41,7 +41,7 @@ router.get("/auth", async (req, res) => {
     }
 });
 
-// Ruta de callback para manejar la respuesta de Shopify
+// Ruta de callback para Shopify
 router.get("/auth/callback", async (req, res) => {
     try {
         const session = await shopify.auth.callback({
