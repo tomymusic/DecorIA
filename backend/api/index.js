@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
-import shopifyAuth from "./shopify-auth.js"; // Autenticación Shopify
+import shopifyAuth from "./shopify-auth.js";
+console.log("📌 shopifyAuth cargado:", shopifyAuth);
 import shopifyProducts from "./shopify-products.js"; // Obtener productos de Shopify
 import { redesignRoom } from "../replicate.js"; // IA para remodelación
 
