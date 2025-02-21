@@ -1,4 +1,5 @@
-const { shopifyApi, LATEST_API_VERSION } = require("@shopify/shopify-api");
+import pkg from "@shopify/shopify-api";
+const { shopifyApi, LATEST_API_VERSION } = pkg;
 import express from "express";
 import dotenv from "dotenv";
 
