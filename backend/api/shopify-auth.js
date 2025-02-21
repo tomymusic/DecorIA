@@ -4,9 +4,10 @@ import dotenv from "dotenv";
 dotenv.config();
 const router = express.Router();
 
-// ✅ Importar Shopify API correctamente
-const shopifyApi = (await import("@shopify/shopify-api")).shopifyApi;
-const ApiVersion = (await import("@shopify/shopify-api")).LATEST_API_VERSION;
+// ✅ Importar Shopify API correctamente usando CommonJS
+const shopifyModule = await import("@shopify/shopify-api");
+const shopifyApi = shopifyModule.default.shopifyApi;
+const ApiVersion = shopifyModule.default.LATEST_API_VERSION;
 
 // ✅ Configuración correcta de Shopify API
 const shopify = shopifyApi({
