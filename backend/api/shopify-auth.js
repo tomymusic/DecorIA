@@ -13,21 +13,26 @@ const APP_URL = process.env.APP_URL; // URL de tu aplicación en Vercel
 router.get("/", (req, res) => {
   const { shop } = req.query;
   if (!shop) {
+    console.error("❌ Falta el parámetro 'shop'.");
     return res.status(400).json({ error: "Falta el parámetro 'shop'." });
   }
 
   const redirectUri = `${APP_URL}/api/shopify-auth/callback`;
-  const installUrl = `https://${shop}/admin/oauth/authorize?client_id=${SHOPIFY_API_KEY}&scope=read_products,write_orders&redirect_uri=${redirectUri}`;
+  const installUrl = `https://${shop}/admin/oauth/authorize?client_id=${SHOPIFY_API_KEY}&scope=read_products,write_products,read_orders,write_orders&redirect_uri=${redirectUri}`;
 
+  console.log(`🔗 Redirigiendo a la instalación de Shopify: ${installUrl}`);
   res.redirect(installUrl);
 });
 
 // 🚀 Ruta para recibir el token de acceso después de la autenticación
 router.get("/callback", async (req, res) => {
-  const { shop, code } = req.query;
+  const { shop, code, hmac, timestamp } = req.query;
+
+  console.log("📥 Parámetros recibidos en /callback:", req.query);
 
   if (!shop || !code) {
-    return res.status(400).json({ error: "Faltan parámetros en la URL." });
+    console.error("❌ Faltan parámetros en la autenticación.");
+    return res.status(400).json({ error: "Faltan parámetros en la autenticación." });
   }
 
   try {
@@ -38,13 +43,13 @@ router.get("/callback", async (req, res) => {
     });
 
     const accessToken = response.data.access_token;
-    console.log(`🔑 Token de acceso recibido: ${accessToken}`);
+    console.log(`✅ Token de acceso recibido: ${accessToken}`);
 
     // 🚀 Redirigir al usuario a la app
     res.redirect(`${APP_URL}?shop=${shop}`);
   } catch (error) {
-    console.error("❌ Error en la autenticación:", error);
-    res.status(500).json({ error: "Error en la autenticación de Shopify." });
+    console.error("❌ Error en la autenticación con Shopify:", error.response ? error.response.data : error);
+    res.status(500).json({ error: "Error en la autenticación con Shopify." });
   }
 });
 
