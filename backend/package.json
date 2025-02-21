@@ -1,5 +1,5 @@
 {
-  "type": "module",
+  "type": "commonjs",
   "name": "backend-decoria",
   "version": "1.0.0",
   "main": "api/index.js",
