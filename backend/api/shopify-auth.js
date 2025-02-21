@@ -1,25 +1,26 @@
-import { shopifyApi, ApiVersion } from "@shopify/shopify-api";
+import pkg from "@shopify/shopify-api";
 import express from "express";
 import dotenv from "dotenv";
 
 dotenv.config();
+const { shopifyApi, ApiVersion } = pkg;
 const router = express.Router();
 
-// ✅ Configuración correcta de Shopify API sin variable extra
+// ✅ Configuración correcta de Shopify API sin errores
 const shopify = shopifyApi({
     apiKey: process.env.SHOPIFY_API_KEY,
     apiSecretKey: process.env.SHOPIFY_API_SECRET,
     scopes: process.env.SHOPIFY_SCOPES.split(","),
-    hostName: "decor-ia.vercel.app", // Se coloca directamente sin variable
-    apiVersion: ApiVersion.January24, // Ajustamos a la versión estable
+    hostName: process.env.SHOPIFY_REDIRECT_URI.replace("https://", ""),
+    apiVersion: ApiVersion.January24,
 });
 
-// ✅ Ruta de prueba para verificar que Shopify API responde
+// ✅ Ruta de prueba
 router.get("/", (req, res) => {
     res.status(200).json({ message: "✅ Shopify Auth API funcionando correctamente!" });
 });
 
-// ✅ Ruta de autenticación con Shopify
+// ✅ Ruta de autenticación
 router.get("/auth", async (req, res) => {
     const { shop } = req.query;
     if (!shop) {
@@ -35,12 +36,12 @@ router.get("/auth", async (req, res) => {
 
         return res.redirect(authRoute);
     } catch (error) {
-        console.error("❌ Error en la autenticación con Shopify:", error);
+        console.error("❌ Error en autenticación con Shopify:", error);
         res.status(500).json({ error: "Error en autenticación con Shopify" });
     }
 });
 
-// ✅ Ruta de callback para Shopify
+// ✅ Ruta de callback
 router.get("/auth/callback", async (req, res) => {
     try {
         const session = await shopify.auth.callback({
