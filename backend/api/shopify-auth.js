@@ -17,7 +17,7 @@ router.get("/", (req, res) => {
     return res.status(400).json({ error: "Falta el parámetro 'shop'." });
   }
 
-  const redirectUri = `https://decor-ia.vercel.app/api/shopify-auth/callback`;
+  const redirectUri = encodeURIComponent(`https://decor-ia.vercel.app/api/shopify-auth/callback`);
   const installUrl = `https://${shop}/admin/oauth/authorize?client_id=${SHOPIFY_API_KEY}&scope=read_products,write_products,read_orders,write_orders&redirect_uri=${redirectUri}`;
 
   console.log(`🔗 Redirigiendo a la instalación de Shopify: ${installUrl}`);
