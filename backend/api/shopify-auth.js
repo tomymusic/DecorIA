@@ -1,13 +1,9 @@
-import express from "express";
-import dotenv from "dotenv";
+const { shopifyApi, LATEST_API_VERSION } = require("@shopify/shopify-api");
+const express = require("express");
+const dotenv = require("dotenv");
 
 dotenv.config();
 const router = express.Router();
-
-// ✅ Importar Shopify API correctamente usando CommonJS
-const shopifyModule = await import("@shopify/shopify-api");
-const shopifyApi = shopifyModule.default.shopifyApi;
-const ApiVersion = shopifyModule.default.LATEST_API_VERSION;
 
 // ✅ Configuración correcta de Shopify API
 const shopify = shopifyApi({
@@ -15,7 +11,7 @@ const shopify = shopifyApi({
     apiSecretKey: process.env.SHOPIFY_API_SECRET,
     scopes: process.env.SHOPIFY_SCOPES.split(","),
     hostName: process.env.SHOPIFY_REDIRECT_URI.replace("https://", ""),
-    apiVersion: ApiVersion,
+    apiVersion: LATEST_API_VERSION,
 });
 
 // ✅ Ruta de prueba
@@ -59,4 +55,4 @@ router.get("/auth/callback", async (req, res) => {
     }
 });
 
-export default router;
+module.exports = router;
