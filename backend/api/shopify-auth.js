@@ -1,18 +1,20 @@
-import pkg from "@shopify/shopify-api";
 import express from "express";
 import dotenv from "dotenv";
 
 dotenv.config();
-const { shopifyApi, ApiVersion } = pkg;
 const router = express.Router();
 
-// ✅ Configuración correcta de Shopify API sin errores
+// ✅ Importar Shopify API correctamente
+const shopifyApi = (await import("@shopify/shopify-api")).shopifyApi;
+const ApiVersion = (await import("@shopify/shopify-api")).LATEST_API_VERSION;
+
+// ✅ Configuración correcta de Shopify API
 const shopify = shopifyApi({
     apiKey: process.env.SHOPIFY_API_KEY,
     apiSecretKey: process.env.SHOPIFY_API_SECRET,
     scopes: process.env.SHOPIFY_SCOPES.split(","),
     hostName: process.env.SHOPIFY_REDIRECT_URI.replace("https://", ""),
-    apiVersion: ApiVersion.January24,
+    apiVersion: ApiVersion,
 });
 
 // ✅ Ruta de prueba
