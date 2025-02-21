@@ -13,11 +13,11 @@
   ],
   "routes": [
     {
-      "src": "^/api/shopify-auth$",
+      "src": "^/api/shopify-auth/callback$",
       "dest": "/backend/api/shopify-auth.js"
     },
     {
-      "src": "^/api/shopify-auth/callback$",
+      "src": "^/api/shopify-auth$",
       "dest": "/backend/api/shopify-auth.js"
     },
     {
