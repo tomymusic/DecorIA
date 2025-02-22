@@ -1,7 +1,6 @@
 import express from "express"; 
 import cors from "cors";
 import shopifyAuth from "./shopify-auth.js";
-console.log("📌 Contenido de shopifyAuth:", shopifyAuth);
 import shopifyProducts from "./shopify-products.js";
 import { redesignRoom } from "../replicate.js"; 
 
