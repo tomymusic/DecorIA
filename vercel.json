@@ -33,6 +33,7 @@
       "dest": "/build/index.html"
     }
   ],
+  "installCommand": "cd backend && npm install",
   "env": {
     "NODE_ENV": "production"
   }
