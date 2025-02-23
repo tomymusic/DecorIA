@@ -1,4 +1,4 @@
-import express from "express";
+import express from "express"; 
 import cors from "cors";
 import { redesignRoom } from "./replicate.js";
 
@@ -15,7 +15,7 @@ app.get("/api/", (req, res) => {
   res.status(200).json({ message: "🚀 DecorIA backend funcionando correctamente!" });
 });
 
-app.post("/api/redesign-room", async (req, res) => {
+app.post("/api/redesign-room", async (req, res, next) => {
   console.log("📥 Petición recibida en /api/redesign-room");
   try {
     const { imageUrl, prompt } = req.body;
@@ -25,8 +25,7 @@ app.post("/api/redesign-room", async (req, res) => {
     const result = await redesignRoom(imageUrl, prompt);
     res.status(200).json(result);
   } catch (error) {
-    console.error("❌ ERROR en /api/redesign-room:", error);
-    res.status(500).json({ error: "Error procesando la imagen", details: error.message });
+    next(error);
   }
 });
 
