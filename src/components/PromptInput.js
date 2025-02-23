@@ -1,34 +1,19 @@
 import { useState } from "react";
 import { ArrowUpRight, ArrowUp, RefreshCw } from "lucide-react";
-import { getRandomSuggestions, Suggestion } from "@/lib/suggestions";
+import { getRandomSuggestions } from "@/lib/suggestions";
 import { Spinner } from "@/components/ui/spinner";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 
-type QualityMode = "performance" | "quality";
-
-interface PromptInputProps {
-  onSubmit: (prompt: string) => void;
-  isLoading?: boolean;
-  showProviders: boolean;
-  onToggleProviders: () => void;
-  mode: QualityMode;
-  onModeChange: (mode: QualityMode) => void;
-  suggestions: Suggestion[];
-}
-
-export function PromptInput({
-  suggestions: initSuggestions,
-  isLoading,
-  onSubmit,
-}: PromptInputProps) {
+export function PromptInput({ suggestions: initSuggestions, isLoading, onSubmit }) {
   const [input, setInput] = useState("");
-  const [suggestions, setSuggestions] = useState<Suggestion[]>(initSuggestions);
+  const [suggestions, setSuggestions] = useState(initSuggestions);
 
   const updateSuggestions = () => {
     setSuggestions(getRandomSuggestions());
   };
-  const handleSuggestionSelect = (prompt: string) => {
+
+  const handleSuggestionSelect = (prompt) => {
     setInput(prompt);
     onSubmit(prompt);
   };
@@ -39,11 +24,7 @@ export function PromptInput({
     }
   };
 
-  // const handleRefreshSuggestions = () => {
-  //   setCurrentSuggestions(getRandomSuggestions());
-  // };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+  const handleKeyDown = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       if (!isLoading && input.trim()) {
@@ -81,8 +62,8 @@ export function PromptInput({
                     index > 2
                       ? "hidden md:flex"
                       : index > 1
-                        ? "hidden sm:flex"
-                        : "",
+                      ? "hidden sm:flex"
+                      : ""
                   )}
                 >
                   <span>
