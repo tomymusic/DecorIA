@@ -4,7 +4,7 @@ import { Button } from "../components/ui/button";
 import { ScrollArea, ScrollBar } from "../components/ui/scroll-area";
 import { Lightbulb } from "lucide-react";
 
-export function PromptSuggestions({ suggestions, onSelect, disabled = false }) {
+function PromptSuggestions({ suggestions, onSelect, disabled = false }) {
   return (
     <div className="relative flex-grow overflow-hidden">
       <ScrollArea className="w-full whitespace-nowrap rounded-md">
@@ -30,3 +30,5 @@ export function PromptSuggestions({ suggestions, onSelect, disabled = false }) {
     </div>
   );
 }
+
+export default PromptSuggestions;
