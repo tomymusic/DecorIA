@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "./components/ui/button";
 import { Card, CardContent } from "./components/ui/card";
-import { motion } from "framer-motion";
 import { Loader2 } from "lucide-react";
 import ReactBeforeSliderComponent from "react-before-after-slider-component";
 import "react-before-after-slider-component/dist/build.css";
@@ -62,42 +61,31 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center bg-gray-50 p-10 text-gray-900">
-      <motion.h1
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="text-4xl font-bold text-center text-gray-800 mb-6"
-      >
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-10 text-gray-900">
+      <h1 className="text-4xl font-bold text-gray-800 mb-6 flex items-center gap-2">
         ✨ Decoración Inteligente IA
-      </motion.h1>
-      <Card className="w-full max-w-4xl p-8 shadow-xl bg-white rounded-lg border border-gray-300">
-        <CardContent className="flex flex-col items-center gap-6">
+      </h1>
+      <Card className="w-full max-w-4xl p-6 bg-white shadow-md rounded-lg border">
+        <CardContent className="flex flex-col gap-4">
           <input
             type="file"
             accept="image/*"
             onChange={handleImageUpload}
-            className="border p-2 rounded-lg w-full text-lg shadow-sm bg-gray-100 file:mr-4 file:py-2 file:px-4 file:h-10 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="block w-full text-sm text-gray-500 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
           />
           <Button
-            className="w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-3 rounded-lg shadow-md text-lg font-semibold hover:scale-105 transition-transform"
+            className="w-full bg-black text-white py-2 rounded-md hover:opacity-80 transition"
             onClick={handleImageGeneration}
             disabled={!imageUploaded || loading}
           >
-            {loading ? <Loader2 className="animate-spin" /> : "Generar Imagen con IA"}
+            {loading ? <Loader2 className="animate-spin" /> : "Generar Imagen"}
           </Button>
-          {errorMessage && <p className="mt-4 text-red-500 text-lg font-semibold">{errorMessage}</p>}
+          {errorMessage && <p className="text-red-500 text-sm">{errorMessage}</p>}
           {imagePreview && processedImage && (
-            <motion.div
-              className="mt-6 w-full max-w-2xl rounded-xl overflow-hidden shadow-md border border-gray-300"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5 }}
-            >
-              <ReactBeforeSliderComponent
-                firstImage={{ imageUrl: imagePreview }}
-                secondImage={{ imageUrl: processedImage }}
-              />
-            </motion.div>
+            <ReactBeforeSliderComponent
+              firstImage={{ imageUrl: imagePreview }}
+              secondImage={{ imageUrl: processedImage }}
+            />
           )}
         </CardContent>
       </Card>
