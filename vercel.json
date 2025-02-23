@@ -2,7 +2,7 @@
   "version": 2,
   "builds": [
     {
-      "src": "backend/api/*.js",
+      "src": "backend/index.js",
       "use": "@vercel/node"
     },
     {
@@ -14,19 +14,19 @@
   "routes": [
     {
       "src": "^/api/shopify-auth/callback$",
-      "dest": "/backend/api/shopify-auth.js"
+      "dest": "/backend/index.js"
     },
     {
       "src": "^/api/shopify-auth$",
-      "dest": "/backend/api/shopify-auth.js"
+      "dest": "/backend/index.js"
     },
     {
       "src": "^/api/redesign-room$",
-      "dest": "/backend/api/redesign-room.js"
+      "dest": "/backend/index.js"
     },
     {
       "src": "^/api/(.*)$",
-      "dest": "/backend/api/$1"
+      "dest": "/backend/index.js"
     },
     {
       "src": "/(.*)",
@@ -37,4 +37,3 @@
     "NODE_ENV": "production"
   }
 }
-
