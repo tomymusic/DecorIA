@@ -1,11 +1,7 @@
 // index.js - Mejorado
 import express from "express"; 
 import cors from "cors";
-import shopifyAuth from "./shopify-auth.js";
-import shopifyProducts from "./shopify-products.js";
 import { redesignRoom } from "./replicate.js";
-import { errorHandler } from "./middleware/errorHandler.js";
-import "./middleware/envValidator.js";
 
 const app = express();
 app.use(cors());
@@ -19,9 +15,6 @@ app.use((req, res, next) => {
 app.get("/api/", (req, res) => {
   res.status(200).json({ message: "🚀 DecorIA backend funcionando correctamente!" });
 });
-
-app.use("/api/shopify-auth", shopifyAuth);
-app.use("/api/shopify-products", shopifyProducts);
 
 app.post("/api/redesign-room", async (req, res, next) => {
   console.log("📥 Petición recibida en /api/redesign-room");
