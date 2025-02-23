@@ -1,7 +1,7 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { Button } from "../components/ui/button";
+import { ScrollArea, ScrollBar } from "../components/ui/scroll-area";
 import { Lightbulb } from "lucide-react";
 
 export function PromptSuggestions({ suggestions, onSelect, disabled = false }) {
