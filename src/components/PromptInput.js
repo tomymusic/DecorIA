@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { ArrowUpRight, ArrowUp, RefreshCw } from "lucide-react";
-import { getRandomSuggestions } from "@/lib/suggestions";
-import { Spinner } from "@/components/ui/spinner";
-import { Textarea } from "@/components/ui/textarea";
-import { cn } from "@/lib/utils";
+import { getRandomSuggestions } from "../lib/suggestions";
+import { Spinner } from "../components/ui/spinner";
+import { Textarea } from "../components/ui/textarea";
+import { cn } from "../lib/utils";
 
 export function PromptInput({ suggestions: initSuggestions, isLoading, onSubmit }) {
   const [input, setInput] = useState("");
