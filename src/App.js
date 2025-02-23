@@ -62,33 +62,27 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-background text-foreground p-6">
-      <motion.h1
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="text-4xl font-bold text-primary mb-6"
-      >
-        ✨ AI SDK Image Generator
-      </motion.h1>
-      <Card className="w-full max-w-3xl p-10 shadow-2xl bg-card rounded-3xl border border-border">
+    <div className="flex flex-col items-center p-8 bg-gradient-to-r from-blue-100 to-white min-h-screen text-gray-900">
+      <h1 className="text-5xl font-semibold mb-8 text-blue-700 tracking-wide">Decoración Inteligente IA</h1>
+      <Card className="w-full max-w-3xl p-10 shadow-2xl bg-white rounded-3xl border border-gray-300">
         <CardContent className="flex flex-col items-center gap-6">
           <input
             type="file"
             accept="image/*"
             onChange={handleImageUpload}
-            className="border p-2 rounded-lg w-full text-lg shadow-md bg-gray-50 file:mr-4 file:py-2 file:px-4 file:h-10 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary"
+            className="border p-2 rounded-lg w-full text-lg shadow-md bg-gray-50 file:mr-4 file:py-2 file:px-4 file:h-10 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
           <Button
-            className="mt-4 bg-gradient-to-r from-primary to-primary-dark text-white px-8 py-3 rounded-xl shadow-lg text-lg font-semibold hover:scale-105 transition-transform"
+            className="mt-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-3 rounded-xl shadow-lg text-lg font-semibold hover:scale-105 transition-transform"
             onClick={handleImageGeneration}
             disabled={!imageUploaded || loading}
           >
             {loading ? <Loader2 className="animate-spin" /> : "Aplicar Estilos con IA"}
           </Button>
-          {errorMessage && <p className="mt-4 text-destructive text-lg font-semibold">{errorMessage}</p>}
+          {errorMessage && <p className="mt-4 text-red-500 text-lg font-semibold">{errorMessage}</p>}
           {imagePreview && processedImage && (
             <motion.div
-              className="mt-6 w-full max-w-2xl rounded-xl overflow-hidden shadow-lg border border-border"
+              className="mt-6 w-full max-w-2xl rounded-xl overflow-hidden shadow-lg border border-gray-300"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5 }}
