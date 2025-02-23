@@ -1,18 +1,23 @@
-// shopify-auth.js - Optimizado
 import { shopifyApi, LATEST_API_VERSION } from "@shopify/shopify-api";
+import { restResources } from "@shopify/shopify-api/rest/admin/2024-01";
+import { shopifyNodeRuntime } from "@shopify/shopify-api/adapters/node/runtime";
 import express from "express";
 import dotenv from "dotenv";
 
 dotenv.config();
 const router = express.Router();
 
-// ✅ Configuración de Shopify API
+// ✅ Configurar el adaptador de Shopify para Node.js (Vercel)
+shopifyApi.use(shopifyNodeRuntime());
+
+// ✅ Configuración correcta de Shopify API
 const shopify = shopifyApi({
     apiKey: process.env.SHOPIFY_API_KEY,
     apiSecretKey: process.env.SHOPIFY_API_SECRET,
     scopes: process.env.SHOPIFY_SCOPES.split(","),
     hostName: process.env.SHOPIFY_REDIRECT_URI.replace("https://", ""),
     apiVersion: LATEST_API_VERSION,
+    restResources
 });
 
 // ✅ Ruta de autenticación
