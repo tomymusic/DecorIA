@@ -7,6 +7,8 @@ export async function redesignRoom(imageUrl, prompt) {
     console.error("❌ ERROR: Missing Replicate API Token!");
     throw new Error("Missing Replicate API Key");
   }
+
+  console.log("✅ Recibiendo imageUrl:", imageUrl); // 🔹 AGREGAR ESTO
   
   if (!imageUrl.startsWith("http")) {
     throw new Error("URL de imagen inválida");
