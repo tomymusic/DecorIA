@@ -5,7 +5,7 @@ import { Spinner } from "../components/ui/spinner";
 import { Textarea } from "../components/ui/textarea";
 import { cn } from "../lib/utils";
 
-export function PromptInput({ suggestions: initSuggestions, isLoading, onSubmit }) {
+function PromptInput({ suggestions: initSuggestions, isLoading, onSubmit }) {
   const [input, setInput] = useState("");
   const [suggestions, setSuggestions] = useState(initSuggestions);
 
@@ -92,3 +92,5 @@ export function PromptInput({ suggestions: initSuggestions, isLoading, onSubmit 
     </div>
   );
 }
+
+export default PromptInput;
