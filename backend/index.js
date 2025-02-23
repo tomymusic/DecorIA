@@ -1,4 +1,3 @@
-// index.js - Mejorado
 import express from "express"; 
 import cors from "cors";
 import { redesignRoom } from "./replicate.js";
@@ -33,7 +32,5 @@ app.post("/api/redesign-room", async (req, res, next) => {
 app.use((req, res) => {
   res.status(404).json({ error: "Ruta no encontrada" });
 });
-
-app.use(errorHandler);
 
 export default app;
