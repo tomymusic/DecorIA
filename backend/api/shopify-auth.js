@@ -1,5 +1,12 @@
 const { shopifyApi, LATEST_API_VERSION } = require("@shopify/shopify-api");
-const { restResources } = require("@shopify/shopify-api/rest/admin/2024-01");
+
+const shopify = shopifyApi({
+    apiKey: process.env.SHOPIFY_API_KEY,
+    apiSecretKey: process.env.SHOPIFY_API_SECRET,
+    scopes: process.env.SHOPIFY_SCOPES.split(","),
+    hostName: process.env.SHOPIFY_REDIRECT_URI.replace("https://", ""),
+    apiVersion: LATEST_API_VERSION
+});
 const express = require("express");
 const dotenv = require("dotenv");
 
