@@ -13,14 +13,6 @@
   ],
   "routes": [
     {
-      "src": "^/api/shopify-auth/callback$",
-      "dest": "/backend/index.js"
-    },
-    {
-      "src": "^/api/shopify-auth$",
-      "dest": "/backend/index.js"
-    },
-    {
       "src": "^/api/redesign-room$",
       "dest": "/backend/index.js"
     },
@@ -33,7 +25,6 @@
       "dest": "/build/index.html"
     }
   ],
-  "installCommand": "cd backend && npm install",
   "env": {
     "NODE_ENV": "production"
   }
