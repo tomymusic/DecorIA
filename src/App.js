@@ -1,6 +1,10 @@
 import React, { useState } from "react";
+import Header from "./components/Header";
+import PromptInput from "./components/PromptInput";
+import PromptSuggestions from "./components/PromptSuggestions";
 import { Button } from "./components/ui/button";
 import { Card, CardContent } from "./components/ui/card";
+import { motion } from "framer-motion";
 import { Loader2 } from "lucide-react";
 import ReactBeforeSliderComponent from "react-before-after-slider-component";
 import "react-before-after-slider-component/dist/build.css";
@@ -34,8 +38,8 @@ export default function Home() {
     setErrorMessage("");
 
     const requestBody = {
-      imageUrl: imagePreview,
-      prompt: "Mejora la decoración del ambiente."
+      imageUrl: imagePreview, // La imagen que el usuario subió
+      prompt: "Mejora la decoración del ambiente." // Prompt fijo
     };
 
     try {
@@ -48,7 +52,7 @@ export default function Home() {
       const data = await response.json();
 
       if (response.ok && data.output && data.output.length > 1) {
-        setProcessedImage(data.output[1]);
+        setProcessedImage(data.output[1]); // Mostrar la segunda imagen generada
       } else {
         setErrorMessage("Error al procesar la imagen.");
       }
@@ -61,31 +65,39 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-10 text-gray-900">
-      <h1 className="text-4xl font-bold text-gray-800 mb-6 flex items-center gap-2">
-        ✨ Decoración Inteligente IA
-      </h1>
-      <Card className="w-full max-w-4xl p-6 bg-white shadow-md rounded-lg border">
-        <CardContent className="flex flex-col gap-4">
+    <div className="flex flex-col items-center p-8 bg-gradient-to-r from-blue-100 to-white min-h-screen text-gray-900">
+      <Header />
+      <PromptInput onSubmit={handleImageGeneration} isLoading={loading} />
+      <PromptSuggestions suggestions={[]} onSelect={setImagePreview} />
+      
+      <Card className="w-full max-w-3xl p-10 shadow-2xl bg-white rounded-3xl border border-gray-300">
+        <CardContent className="flex flex-col items-center gap-6">
           <input
             type="file"
             accept="image/*"
             onChange={handleImageUpload}
-            className="block w-full text-sm text-gray-500 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
+            className="border p-2 rounded-lg w-full text-lg shadow-md bg-gray-50 file:mr-4 file:py-2 file:px-4 file:h-10 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
           <Button
-            className="w-full bg-black text-white py-2 rounded-md hover:opacity-80 transition"
+            className="mt-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-3 rounded-xl shadow-lg text-lg font-semibold hover:scale-105 transition-transform"
             onClick={handleImageGeneration}
             disabled={!imageUploaded || loading}
           >
-            {loading ? <Loader2 className="animate-spin" /> : "Generar Imagen"}
+            {loading ? <Loader2 className="animate-spin" /> : "Aplicar Estilos con IA"}
           </Button>
-          {errorMessage && <p className="text-red-500 text-sm">{errorMessage}</p>}
+          {errorMessage && <p className="mt-4 text-red-500 text-lg font-semibold">{errorMessage}</p>}
           {imagePreview && processedImage && (
-            <ReactBeforeSliderComponent
-              firstImage={{ imageUrl: imagePreview }}
-              secondImage={{ imageUrl: processedImage }}
-            />
+            <motion.div
+              className="mt-6 w-full max-w-2xl rounded-xl overflow-hidden shadow-lg border border-gray-300"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+            >
+              <ReactBeforeSliderComponent
+                firstImage={{ imageUrl: imagePreview }}
+                secondImage={{ imageUrl: processedImage }}
+              />
+            </motion.div>
           )}
         </CardContent>
       </Card>
