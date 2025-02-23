@@ -1,6 +1,5 @@
 import { shopifyApi, LATEST_API_VERSION } from "@shopify/shopify-api";
-import { restResources } from "@shopify/shopify-api/rest/admin/2024-01";
-import { shopifyNodeRuntime } from "@shopify/shopify-api/adapters/node/runtime";
+import * as restResources from "@shopify/shopify-api/rest/admin/2024-01/index.js"; // 👈 Asegurar que el módulo es correcto
 import express from "express";
 import dotenv from "dotenv";
 
