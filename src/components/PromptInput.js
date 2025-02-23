@@ -5,9 +5,9 @@ import { Spinner } from "../components/ui/spinner";
 import { Textarea } from "../components/ui/textarea";
 import { cn } from "../lib/utils";
 
-function PromptInput({ suggestions: initSuggestions, isLoading, onSubmit }) {
+function PromptInput({ suggestions: initSuggestions = [], isLoading, onSubmit }) {
   const [input, setInput] = useState("");
-  const [suggestions, setSuggestions] = useState(initSuggestions);
+  const [suggestions, setSuggestions] = useState(initSuggestions || []);
 
   const updateSuggestions = () => {
     setSuggestions(getRandomSuggestions());
@@ -53,7 +53,7 @@ function PromptInput({ suggestions: initSuggestions, isLoading, onSubmit }) {
               >
                 <RefreshCw className="w-4 h-4 text-zinc-500 group-hover:opacity-70" />
               </button>
-              {suggestions.map((suggestion, index) => (
+              {suggestions.length > 0 && suggestions.map((suggestion, index) => (
                 <button
                   key={index}
                   onClick={() => handleSuggestionSelect(suggestion.prompt)}
