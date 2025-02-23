@@ -26,20 +26,28 @@
 ### 📦 Estructura del Proyecto
 ```
 backend/
-  ├── api/
-  │   ├── index.js
-  │   ├── shopify-auth.js
-  │   ├── shopify-products.js
-  │   ├── redesign-room.js
+  ├── index.js
   ├── package.json
+  ├── redesign-room.js
   ├── replicate.js
+
 public/
+  ├── index.html
+
 src/
-  ├── .gitignore
-  ├── README.md
-  ├── package.json
-  ├── tailwind.config.js
-  ├── vercel.json
+  ├── components/ui/
+  │   ├── button.js
+  │   ├── card.js
+  │   ├── input.js
+  ├── App.js
+  ├── index.css
+  ├── index.js
+
+.gitignore
+README.md
+package.json
+tailwind.config.js
+vercel.json
 ```
 
 ---
