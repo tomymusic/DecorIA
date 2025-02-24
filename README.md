@@ -39,6 +39,10 @@ src/
   │   ├── button.js
   │   ├── card.js
   │   ├── input.js
+  │   ├── scroll-area.js
+  │   ├── spinner.js
+  │   ├── textarea.js
+  ├── App.js
   ├── App.js
   ├── index.css
   ├── index.js
