@@ -1,6 +1,9 @@
-module.exports = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['vercel.app'], // Asegura que Vercel permita cargar archivos estáticos
+    domains: [], // Agrega aquí los dominios permitidos para imágenes si usas `next/image`
   },
 };
+
+module.exports = nextConfig;
