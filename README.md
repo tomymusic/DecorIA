@@ -25,33 +25,46 @@
 
 ### 📦 Estructura del Proyecto
 ```
-backend/
-  ├── index.js
-  ├── package.json
-  ├── redesign-room.js
-  ├── replicate.js
+DecorIA/
+├── public/
+│   ├── fonts/
+│   │   ├── GeistMonoVF.woff
+│   │   ├── GeistVF.woff
+│
+├── src/
+│   ├── app/
+│   │   ├── layout.tsx
+│   │   ├── page.tsx
+│   │   ├── api/
+│   │   │   ├── redesign-room/
+│   │   │   │   ├── route.ts   ✅ CORRECTO
+│
+│   ├── components/
+│   │   ├── ui/
+│   │   │   ├── button.tsx
+│   │   │   ├── card.tsx
+│   │   │   ├── input.tsx
+│   │   │   ├── scroll-area.tsx
+│   │   │   ├── spinner.tsx
+│   │   │   ├── textarea.tsx
+│   │   ├── Header.tsx
+│   │   ├── PromptInput.tsx
+│   │   ├── PromptSuggestions.tsx
+│
+│   ├── lib/
+│   │   ├── replicate.ts
+│
+│   ├── styles/
+│   │   ├── globals.css
+│
+├── .gitignore
+├── README.md
+├── next.config.js
+├── package.json
+├── tailwind.config.ts
+├── tsconfig.json
+├── vercel.json
 
-public/
-  ├── index.html
-
-src/
-  ├── components/ui/
-  │   ├── button.js
-  │   ├── card.js
-  │   ├── input.js
-  │   ├── scroll-area.js
-  │   ├── spinner.js
-  │   ├── textarea.js
-  ├── App.js
-  ├── App.js
-  ├── index.css
-  ├── index.js
-
-.gitignore
-README.md
-package.json
-tailwind.config.js
-vercel.json
 ```
 
 ---
@@ -62,10 +75,6 @@ DecorIA se ejecuta en **Vercel** y se despliega automáticamente desde **GitHub*
 ### 1️⃣ Variables de Entorno
 
 ```
-SHOPIFY_API_SECRET=your_secret_key
-SHOPIFY_API_KEY=your_api_key
-APP_URL=https://decor-ia.vercel.app
-SHOPIFY_STORE_URL=your_store_url
 REPLICATE_API_TOKEN=your_replicate_api_token
 ENABLE_EXPERIMENTAL_CACHE=true
 ```
@@ -74,9 +83,6 @@ ENABLE_EXPERIMENTAL_CACHE=true
 | Método | Ruta | Descripción |
 |--------|------|-------------|
 | **GET** | `/api/` | Verifica que el backend esté activo |
-| **GET** | `/api/shopify-auth` | Inicia autenticación con Shopify |
-| **GET** | `/api/shopify-auth/callback` | Callback de autenticación |
-| **GET** | `/api/shopify-products` | Obtiene productos de la tienda |
 | **POST** | `/api/redesign-room` | Aplica IA para rediseño de habitaciones |
 
 ---
