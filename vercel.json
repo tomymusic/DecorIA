@@ -1,28 +1,9 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "backend/index.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": { "distDir": "build" }
-    }
-  ],
   "routes": [
     {
       "src": "^/api/redesign-room$",
-      "dest": "/backend/index.js"
-    },
-    {
-      "src": "^/api/(.*)$",
-      "dest": "/backend/index.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/build/index.html"
+      "dest": "/api/redesign-room"
     }
   ],
   "env": {
