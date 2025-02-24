@@ -9,21 +9,21 @@ import { Loader2 } from "lucide-react";
 import ReactBeforeSliderComponent from "react-before-after-slider-component";
 import "react-before-after-slider-component/dist/build.css";
 
-export default function Home() {
-  const [imagePreview, setImagePreview] = useState(null);
-  const [processedImage, setProcessedImage] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
-  const [imageUploaded, setImageUploaded] = useState(false);
+const App: React.FC = () => {
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [processedImage, setProcessedImage] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [imageUploaded, setImageUploaded] = useState<boolean>(false);
 
-  const handleImageUpload = (event) => {
-    const file = event.target.files[0];
-    if (!file) return setErrorMessage("No se seleccionó ninguna imagen.");
+  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return setErrorMessage("❌ No se seleccionó ninguna imagen.");
 
     setErrorMessage("");
     const reader = new FileReader();
     reader.onloadend = () => {
-      setImagePreview(reader.result);
+      setImagePreview(reader.result as string);
       setImageUploaded(true);
     };
     reader.readAsDataURL(file);
@@ -31,7 +31,7 @@ export default function Home() {
 
   const handleImageGeneration = async () => {
     if (!imageUploaded) {
-      return setErrorMessage("Por favor, sube una imagen antes de generar.");
+      return setErrorMessage("⚠️ Por favor, sube una imagen antes de generar.");
     }
 
     setLoading(true);
@@ -54,11 +54,11 @@ export default function Home() {
       if (response.ok && data.output && data.output.length > 1) {
         setProcessedImage(data.output[1]); // Mostrar la segunda imagen generada
       } else {
-        setErrorMessage("Error al procesar la imagen.");
+        setErrorMessage("❌ Error al procesar la imagen.");
       }
     } catch (error) {
-      console.error("Error:", error);
-      setErrorMessage("Hubo un problema con la generación de la imagen.");
+      console.error("❌ Error:", error);
+      setErrorMessage("⚠️ Hubo un problema con la generación de la imagen.");
     } finally {
       setLoading(false);
     }
@@ -103,4 +103,6 @@ export default function Home() {
       </Card>
     </div>
   );
-}
+};
+
+export default App;
