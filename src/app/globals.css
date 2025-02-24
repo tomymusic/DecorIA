@@ -2,18 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: "Geist Sans";
-  src: url("./fonts/GeistVF.woff") format("woff");
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Geist Mono";
-  src: url("./fonts/GeistMonoVF.woff") format("woff");
-  font-display: swap;
-}
-
 /* Definir variables CSS globales */
 :root {
   --font-geist-sans: "Geist Sans", sans-serif;
