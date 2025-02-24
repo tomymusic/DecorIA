@@ -6,4 +6,9 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+export default {
+  reactStrictMode: true,
+  images: {
+    domains: ["cdn.shopify.com", "replicate.delivery"],
+  },
+};
