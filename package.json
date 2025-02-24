@@ -10,7 +10,7 @@
     "node-fetch": "^2.6.1",
     "axios": "^1.6.0",
     "react": "^19.0.0",
-    "react-dom": "^19..0",
+    "react-dom": "^19.0.0",
     "react-scripts": "5.0.1",
     "@radix-ui/react-scroll-area": "^1.2.2",
     "react-before-after-slider-component": "^1.0.4",
