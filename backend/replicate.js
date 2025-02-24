@@ -1,17 +1,23 @@
 import fetch from "node-fetch";
 
-const REPLICATE_API_TOKEN = process.env.REPLICATE_API_TOKEN;
+const REPLICATE_API_TOKEN: string | undefined = process.env.REPLICATE_API_TOKEN;
 
-export async function redesignRoom(imageUrl, prompt) {
-  if (!REPLICATE_API_TOKEN) {
-    console.error("❌ ERROR: Missing Replicate API Token!");
-    throw new Error("Missing Replicate API Key");
-  }
+if (!REPLICATE_API_TOKEN) {
+  console.error("❌ ERROR: Missing Replicate API Token!");
+  throw new Error("Missing Replicate API Key");
+}
 
+interface ReplicateResponse {
+  id: string;
+  status: string;
+  output?: string;
+  detail?: string;
+}
+
+export async function redesignRoom(imageUrl: string, prompt: string): Promise<{ output?: string }> {
   try {
     console.log("🚀 Enviando solicitud a Replicate con:", { imageUrl, prompt });
 
-    // 1️⃣ Enviar la petición a la IA para rediseñar el espacio
     const startResponse = await fetch("https://api.replicate.com/v1/predictions", {
       method: "POST",
       headers: {
@@ -24,7 +30,7 @@ export async function redesignRoom(imageUrl, prompt) {
       })
     });
 
-    const startData = await startResponse.json();
+    const startData: ReplicateResponse = await startResponse.json();
 
     if (!startResponse.ok) {
       console.error("❌ API ERROR:", startData);
@@ -33,15 +39,14 @@ export async function redesignRoom(imageUrl, prompt) {
 
     console.log("✅ Procesamiento iniciado. ID:", startData.id);
 
-    // 2️⃣ Esperar a que la IA termine el procesamiento
     let status = startData.status;
-    let output = null;
+    let output: string | undefined = undefined;
     let attempts = 0;
-    const maxAttempts = 20; // Evita bucles infinitos
+    const maxAttempts = 20;
 
     while ((status === "starting" || status === "processing") && attempts < maxAttempts) {
       console.log(`⏳ Intento ${attempts + 1}: Esperando a que la IA complete el procesamiento...`);
-      await new Promise(resolve => setTimeout(resolve, 5000)); // Esperar 5 segundos antes de consultar de nuevo
+      await new Promise(resolve => setTimeout(resolve, 5000));
 
       const checkResponse = await fetch(`https://api.replicate.com/v1/predictions/${startData.id}`, {
         headers: {
@@ -49,7 +54,7 @@ export async function redesignRoom(imageUrl, prompt) {
         }
       });
 
-      const checkData = await checkResponse.json();
+      const checkData: ReplicateResponse = await checkResponse.json();
       status = checkData.status;
       output = checkData.output;
       attempts++;
@@ -66,7 +71,7 @@ export async function redesignRoom(imageUrl, prompt) {
 
     console.log("✅ IA Procesamiento Completo:", output);
     return { output };
-  } catch (error) {
+  } catch (error: any) {
     console.error("❌ ERROR PROCESANDO LA IMAGEN:", error.message);
     throw new Error(`Error procesando la imagen: ${error.message}`);
   }
