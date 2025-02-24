@@ -1,3 +1,4 @@
+import type { ReplicateResponse } from "@/types/replicate";
 import fetch from "node-fetch";
 
 const REPLICATE_API_TOKEN: string | undefined = process.env.REPLICATE_API_TOKEN;
@@ -5,13 +6,6 @@ const REPLICATE_API_TOKEN: string | undefined = process.env.REPLICATE_API_TOKEN;
 if (!REPLICATE_API_TOKEN) {
   console.error("❌ ERROR: Missing Replicate API Token!");
   throw new Error("Missing Replicate API Key");
-}
-
-interface ReplicateResponse {
-  id: string;
-  status: string;
-  output?: string;
-  detail?: string;
 }
 
 export async function redesignRoom(imageUrl: string, prompt: string): Promise<{ output?: string }> {
@@ -49,9 +43,7 @@ export async function redesignRoom(imageUrl: string, prompt: string): Promise<{ 
       await new Promise(resolve => setTimeout(resolve, 5000));
 
       const checkResponse = await fetch(`https://api.replicate.com/v1/predictions/${startData.id}`, {
-        headers: {
-          "Authorization": `Token ${REPLICATE_API_TOKEN}`
-        }
+        headers: { "Authorization": `Token ${REPLICATE_API_TOKEN}` }
       });
 
       const checkData: ReplicateResponse = await checkResponse.json();
