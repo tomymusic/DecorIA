@@ -4,16 +4,15 @@
 
 @font-face {
   font-family: "Geist Sans";
-  src: url("/fonts/GeistVF.woff") format("woff");
+  src: url("/fonts/GeistVF-NEW.woff") format("woff");
   font-display: swap;
 }
 
 @font-face {
   font-family: "Geist Mono";
-  src: url("/fonts/GeistMonoVF.woff") format("woff");
+  src: url("/fonts/GeistMonoVF-NEW.woff") format("woff");
   font-display: swap;
 }
-
 
 /* Apply Global Styles */
 @layer base {
