@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Definir fuentes con @font-face */
 @font-face {
   font-family: "Geist Sans";
   src: url("/fonts/GeistVF.woff") format("woff");
@@ -14,10 +15,25 @@
   font-display: swap;
 }
 
-/* Apply Global Styles */
+/* Definir variables CSS globales */
+:root {
+  --font-geist-sans: "Geist Sans", sans-serif;
+  --font-geist-mono: "Geist Mono", monospace;
+}
+
+/* Aplicar estilos globales con Tailwind */
 @layer base {
   body {
     @apply bg-background text-foreground;
-    font-family: "Geist Sans", sans-serif;
+    font-family: var(--font-geist-sans);
   }
+}
+
+/* Clases personalizadas para usar las fuentes */
+.font-geist {
+  font-family: var(--font-geist-sans);
+}
+
+.font-mono {
+  font-family: var(--font-geist-mono);
 }
