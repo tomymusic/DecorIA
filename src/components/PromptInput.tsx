@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { ArrowUpRight, ArrowUp, RefreshCw } from "lucide-react";
-import type { Suggestion } from "@/lib/suggestions"; 
-import { getRandomSuggestions } from "@/lib/suggestions";
-import { cn } from "@/lib/utils";
+import { getRandomSuggestions, Suggestion } from "@/lib/suggestions";
 import { Spinner } from "@/components/ui/spinner";
 import { Textarea } from "@/components/ui/textarea";
+import { cn } from "@/lib/utils";
 
-export type QualityMode = "performance" | "quality";
+type QualityMode = "performance" | "quality";
 
 interface PromptInputProps {
   onSubmit: (prompt: string) => void;
