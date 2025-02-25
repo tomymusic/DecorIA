@@ -2,13 +2,8 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: [], // Agrega aquí los dominios permitidos para imágenes si usas `next/image`
+    domains: ["cdn.shopify.com", "replicate.delivery"], // Agrega los dominios permitidos para imágenes
   },
 };
 
-export default {
-  reactStrictMode: true,
-  images: {
-    domains: ["cdn.shopify.com", "replicate.delivery"],
-  },
-};
+export default nextConfig;
