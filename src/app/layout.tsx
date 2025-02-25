@@ -14,20 +14,21 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "DecorIA - IA para Diseño de Interiores",
-  description: "Plugin de Shopify que rediseña habitaciones con IA y conecta con productos en la tienda.",
+  title: "AI SDK Image Generator",
+  description: "An open-source AI image generator using the AI SDK by Vercel",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{ children: React.ReactNode }>) {
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
-    <html lang="es" className={`${geistSans.variable} ${geistMono.variable}`}>
-      <head>
-        <meta charSet="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </head>
-      <body className="font-sans antialiased">{children}</body>
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className="font-sans antialiased">
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }
