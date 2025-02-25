@@ -62,7 +62,15 @@ const Home: React.FC = () => {
   return (
     <div className="flex flex-col items-center p-8 bg-gradient-to-r from-blue-100 to-white min-h-screen text-gray-900">
       <Header />
-      <PromptInput onSubmit={handleImageGeneration} isLoading={loading} />
+      <PromptInput 
+  onSubmit={handleImageGeneration} 
+  isLoading={loading}
+  showProviders={false}  // O usa un estado si es dinámico
+  onToggleProviders={() => {}} // Ajusta según tu lógica
+  mode="standard" // Reemplaza con el modo por defecto
+  onModeChange={(mode) => console.log(mode)} // Ajusta según tu lógica
+  suggestions={[]} // Debe contener las sugerencias o un array vacío
+/>
       <PromptSuggestions suggestions={[]} onSelect={setImagePreview} />
       
       <Card className="w-full max-w-3xl p-10 shadow-2xl bg-white rounded-3xl border border-gray-300">
