@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { ArrowUpRight, ArrowUp, RefreshCw } from "lucide-react";
-import { getRandomSuggestions } from "../lib/suggestions";
-import { cn } from "../lib/utils";
-import { Spinner } from "../components/ui/spinner";
-import { Textarea } from "../components/ui/textarea";
+import { getRandomSuggestions } from "@/lib/suggestions";
+import { cn } from "@/lib/utils";
+import { Spinner } from "@/components/ui/spinner";
+import { Textarea } from "@/components/ui/textarea";
 
 type QualityMode = "performance" | "quality";
 
