@@ -68,7 +68,7 @@ const Home: React.FC = () => {
   isLoading={loading}
   showProviders={false}  // O usa un estado si es dinámico
   onToggleProviders={() => {}} // Ajusta según tu lógica
-  mode="standard" // Reemplaza con el modo por defecto
+  mode="performance" // Reemplaza con el modo por defecto
   onModeChange={(mode) => console.log(mode)} // Ajusta según tu lógica
   suggestions={[]} // Debe contener las sugerencias o un array vacío
 />
