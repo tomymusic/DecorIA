@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 import ReactBeforeSliderComponent from "react-before-after-slider-component";
 import "react-before-after-slider-component/dist/build.css";
+import type { QualityMode } from "@/components/PromptInput";
 
 const Home: React.FC = () => {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
