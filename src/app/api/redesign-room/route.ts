@@ -1,22 +1,20 @@
-import type { NextApiRequest, NextApiResponse } from "next";
+import { NextResponse } from "next/server";
 import { redesignRoom } from "@/lib/replicate";
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method Not Allowed" });
-  }
-
-  const { imageUrl, prompt } = req.body as { imageUrl: string; prompt: string };
-
-  if (!imageUrl || !prompt) {
-    return res.status(400).json({ error: "Missing parameters" });
-  }
-
+// Asegurar que solo acepta métodos POST
+export async function POST(req: Request) {
   try {
+    const body = await req.json();
+    const { imageUrl, prompt } = body;
+
+    if (!imageUrl || !prompt) {
+      return NextResponse.json({ error: "Missing parameters" }, { status: 400 });
+    }
+
     const result = await redesignRoom(imageUrl, prompt);
-    return res.status(200).json(result);
+    return NextResponse.json(result);
   } catch (error: any) {
     console.error("❌ ERROR:", error.message);
-    return res.status(500).json({ error: "Internal Server Error", details: error.message });
+    return NextResponse.json({ error: "Internal Server Error", details: error.message }, { status: 500 });
   }
 }
