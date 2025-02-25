@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { Spinner } from "@/components/ui/spinner";
 import { Textarea } from "@/components/ui/textarea";
 
-type QualityMode = "performance" | "quality";
+export type QualityMode = "performance" | "quality";
 
 interface PromptInputProps {
   onSubmit: (prompt: string) => void;
