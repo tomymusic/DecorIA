@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import Header from "../components/Header";
-import PromptInput from "../components/PromptInput";
-import PromptSuggestions from "../components/PromptSuggestions";
-import { Card, CardContent } from "../components/ui/card";
-import { Button } from "../components/ui/button";
+import { Header } from "@/components/Header";
+import { PromptInput } from "@/components/PromptInput";
+import { PromptSuggestions } from "@/components/PromptSuggestions";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 import ReactBeforeSliderComponent from "react-before-after-slider-component";
 import "react-before-after-slider-component/dist/build.css";
