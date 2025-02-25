@@ -46,7 +46,7 @@ export async function redesignRoom(imageUrl: string, prompt: string): Promise<{ 
         headers: { "Authorization": `Token ${REPLICATE_API_TOKEN}` }
       });
 
-      const checkData: ReplicateResponse = await checkResponse.json();
+      const checkData = await checkResponse.json() as ReplicateResponse;
       status = checkData.status;
       output = checkData.output;
       attempts++;
