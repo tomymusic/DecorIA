@@ -1,9 +1,9 @@
 "use client";
 
-import { Button } from "../components/ui/button";
-import { ScrollArea, ScrollBar } from ../components/ui/scroll-area";
+import { Button } from "@/components/ui/button";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Lightbulb } from "lucide-react";
-import { Suggestion } from ../lib/suggestions";
+import { Suggestion } from "@/lib/suggestions";
 
 interface PromptSuggestionsProps {
   suggestions: Suggestion[];
