@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ArrowUpRight, ArrowUp, RefreshCw } from "lucide-react";
+import type { Suggestion } from "@/lib/suggestions"; 
 import { getRandomSuggestions } from "@/lib/suggestions";
 import { cn } from "@/lib/utils";
 import { Spinner } from "@/components/ui/spinner";
