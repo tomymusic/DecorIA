@@ -24,7 +24,7 @@ export async function redesignRoom(imageUrl: string, prompt: string): Promise<{ 
       })
     });
 
-    const startData: ReplicateResponse = await startResponse.json();
+    const startData = await startResponse.json() as ReplicateResponse;
 
     if (!startResponse.ok) {
       console.error("❌ API ERROR:", startData);
